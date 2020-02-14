@@ -5,10 +5,10 @@ const morgan = require('morgan');
 const mongoose = require('mongoose'); 
 
 /*Conecta al servidor*/
-/*servidor.listen(3000, () => {
+servidor.listen(3000, () => {
    console.log('servidor 3000');
 });
-*/
+
 /*Configuraciones generales*/
 servidor.set('views', ruta.join(__dirname, 'views')); 			//Le indica donde se encuentra la carpeta Vistas. Crea una ruta unica sin importar el sistema operativo que se use.
 servidor.set('view engine', 'ejs');					//Uso del motor de plantillas ejs.
