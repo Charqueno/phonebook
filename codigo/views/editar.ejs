@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Phonebook</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+        <% for(var i = 0; i < tuplas.length; i++) { %>
+        <div id='temporal' >
+		<form action="/Actualizar/<%= tuplas[i].nombre %>" method="POST">
+			<input type="text" id="in_nom" name="nombre" placeholder="Nombre: " value = <%= tuplas[i].nombre %> required>
+			<input type="text" id="in_tel" name="telefono" placeholder="Telefono: " value = <%= tuplas[i].telefono %> required>
+			<input type="text" id="in_mail" name="email" placeholder="Email: " value = <%= tuplas[i].email %> >
+			<input type="text" id="in_ape" name="apellidos" placeholder="Apellidos: " value = <%= tuplas[i].apellidos %> >
+			<input type="text" id="in_ami" name="amigos" placeholder="Amigos: "value = <%= tuplas[i].amigos %> >
+			<button type="submit" id="btn_update"> Actualizar </button>
+		</form>
+		</div>
+        <% } %>
+    </body>
+</html> 
+
