@@ -4,8 +4,9 @@ const ruta = require('path');
 const morgan = require('morgan'); 
 const mongoose = require('mongoose'); 
 
+const port = process.env.port || 3000;
 /*Conecta al servidor*/
-servidor.listen(3000, () => {
+servidor.listen(port, () => {
    console.log('servidor 3000');
 });
 
