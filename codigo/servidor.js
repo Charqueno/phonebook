@@ -4,11 +4,9 @@ const ruta = require('path');
 const morgan = require('morgan'); 
 const mongoose = require('mongoose'); 
 
-const port = process.env.port || 3000;
+
 /*Conecta al servidor*/
-servidor.listen(port, () => {
-   console.log('servidor 3000');
-});
+servidor.listen(process.env.PORT || 5000);
 
 /*Configuraciones generales*/
 servidor.set('views', ruta.join(__dirname, 'views')); 			//Le indica donde se encuentra la carpeta Vistas. Crea una ruta unica sin importar el sistema operativo que se use.
