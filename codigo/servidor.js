@@ -6,7 +6,10 @@ const mongoose = require('mongoose');
 
 
 /*Conecta al servidor*/
-servidor.listen(process.env.PORT || 5000);
+const PORT = process.env.PORT || 3000;
+servidor.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
 
 /*Configuraciones generales*/
 servidor.set('views', ruta.join(__dirname, 'views')); 			//Le indica donde se encuentra la carpeta Vistas. Crea una ruta unica sin importar el sistema operativo que se use.
