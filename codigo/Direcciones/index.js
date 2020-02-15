@@ -33,7 +33,7 @@ router.get('/principal', (req, res) => {
             console.log(datos);
             res.render('principal', {tuplas: datos});				//Le asigna los datos a una etiqueta para utilizarse en el código HTML.
 	});
-   							
+      res.redirect('/principal');				
 });
 
 
