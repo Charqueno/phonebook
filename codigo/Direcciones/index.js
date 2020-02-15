@@ -1,46 +1,49 @@
-const express = require('express');
-const router = express.Router();
-const actividad = require('../Modelos/actividades');
-const mongoose = require('mongoose');
+const express = require('express');						//Se importa el framework de express.
+const router = express.Router();						//Se creo la variable de direccionamiento.
+const actividad = require('../Modelos/actividades');				//Manda llamar al esquema que se creo.
+const mongoose = require('mongoose');						//Se carga el módulo mongoose. SIrve como conexión entre mongoDB y node js.
 
 /*Login*/
-router.get('/', (req, res) => {
-  res.render('login');
+router.get('/', (req, res) => {							//La vista login aparecera al principio al cargar la página.
+  res.render('login');								//Renderiza la vista.
   
 });
 
-router.post('/acceder', (req, res) => {
-  const info = req.body;
+/*Recibe por POST los datos ingresados por el login*/
+router.post('/correcto', (req, res) => {						
+  const info = req.body;							//Obtiene los datos enviados del POST
   console.log(req.body);
   
-  if(req.body.username == 'neuron' && req.body.password == "12345"){
+  if(req.body.username == 'neuron' && req.body.password == "12345"){		//Condición para acceder a la vista principal. Manda los datos de la BD a la vista llamada principal.ejs.
   const informacion = actividad.find(
         function(err, datos) {
   	    if(err) return console.error(err);
             console.log(datos);
-            res.render('principal', {tuplas: datos});
+            res.render('principal', {tuplas: datos});				//Le asigna los datos a una etiqueta para utilizarse en el código HTML.
 	});
    }else
-     res.render('login');
+     res.render('login');							
 });
 
-/*Renderiza la pagina principal.ejs*/
-router.get('/', (req, res) => {
+router.get('/principal', (req, res) => {						
+  
   const informacion = actividad.find(
         function(err, datos) {
   	    if(err) return console.error(err);
             console.log(datos);
-            res.render('principal', {tuplas: datos});
+            res.render('principal', {tuplas: datos});				//Le asigna los datos a una etiqueta para utilizarse en el código HTML.
 	});
+   							
 });
+
 
 /*Recibe el POST enviado por el boton Agregar*/
 router.post('/Agregar', (req, res) => {				
   const datos = new actividad(req.body);				//Le asigna automaticamente la id al registrar un dato. req.body agrega los datos que recibe de los input al objeto.
   datos.save(function(err, datos) {
   if (err) return console.error(err);
-  });
-  res.redirect('/');
+  res.redirect('/principal');});
+  
   
 });
 
@@ -80,7 +83,7 @@ router.get('/Actualizar/:nombre', (req, res) => {
 router.post('/Actualizar/:nombre', (req, res) => {
   const id = req.params;
   
-  const tupla = actividad.update(id, req.body, function(err, datos) {if(err) return console.error(err);res.redirect('/');});
+  const tupla = actividad.update(id, req.body, function(err, datos) {if(err) return console.error(err);res.redirect('/principal');});
   
 });
 
@@ -90,7 +93,7 @@ router.get('/Eliminar/:nombre', (req, res) => {
   console.log(req.params);
   console.log(id);
   actividad.remove(id,function(err, datos) {if(err) return console.error(err);} );
-  res.redirect('/');
+  res.redirect('/principal');
   
 });
 
